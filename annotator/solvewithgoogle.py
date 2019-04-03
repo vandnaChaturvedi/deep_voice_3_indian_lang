@@ -30,12 +30,7 @@ assert sorted_files_with_lens[0][0] <= clip_at # no file should be longer than 1
 
 print('Beginning transcription of {} files, will skip already finished files'.format(len(sorted_files_with_lens)))
 print('Files contain {} hours of audio'.format(sum([c for c, f in sorted_files_with_lens]) / 3600))
-#
-# plt.hist([c for c, f in sorted_files_with_lens])
 
-# plt.savefig('hist.png', bbox_inches='tight')
-
-#exit(0)
 
 # Instantiates a client
 client = speech.SpeechClient()
@@ -66,9 +61,7 @@ def recognize(file_name):
 
 		for result in response.results:
 			text = result.alternatives[0].transcript
-			
-
-			with open(output_filename, 'wb') as out:
+			with open(output_filename, 'wb':q) as out:
 				out.write(text.encode('utf8'))
 	#			out.write(text)
 	except Exception as e:
@@ -78,4 +71,4 @@ def recognize(file_name):
 
 pool = ThreadPoolExecutor(4)
 futures = [pool.submit(recognize, file) for file in files]
-#_ = [r.result() for r in tqdm(as_completed(futures), total=len(futures))]
+_ = [r.result() for r in tqdm(as_completed(futures), total=len(futures))]
